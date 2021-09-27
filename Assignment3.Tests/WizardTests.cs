@@ -1,4 +1,5 @@
 using Xunit;
+using System.Collections.Generic;
 
 namespace BDSA2021.Assignment03.Tests
 {
@@ -10,6 +11,33 @@ namespace BDSA2021.Assignment03.Tests
             var wizards = Wizard.Wizards.Value;
 
             Assert.Equal(12, wizards.Count);
+        }
+
+        [Fact]
+        public void Two_With_Rowling()
+        {
+            var wizards = Queries.byRowling();
+            Assert.Contains(wizards, w => w.Contains("Dumbledore") || w.Contains("Harry Potter"));
+            var wizards2 = Queries.byRowlingSorted();
+            Assert.Contains(wizards, w => w.Contains("Dumbledore") || w.Contains("Harry Potter"));
+        }
+
+        [Fact]
+        public void Dart_Vader_1977() 
+        {
+            var vader = Queries.firstDarth();
+            Assert.Contains(vader, y => y == 1977);
+            var vader2 = Queries.firstDarthSorted();
+            Assert.Contains(vader2, y => y == 1977);
+        }
+
+        [Fact]
+        public void Harry_Potter()
+        {
+            var potters = Queries.HarryPotter();
+            Assert.Contains(potters, p => p.Equals(("Dumbledore", 2001)) || p.Equals(("Harry Potter", 2001)));
+            var potters2 = Queries.HarryPotterSorted();
+            Assert.Contains(potters, p => p.Equals(("Dumbledore", 2001)) || p.Equals(("Harry Potter", 2001)));
         }
 
         [Theory]

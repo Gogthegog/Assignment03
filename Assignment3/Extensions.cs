@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BDSA2021.Assignment03
 {
@@ -16,15 +17,15 @@ namespace BDSA2021.Assignment03
                 new char[] {' ', '.', '?'}, StringSplitOptions.RemoveEmptyEntries).Length;            
         }
 
-    //     public static void Print<T>(this IEnumerable<T> items)
-    //     {
-    //         foreach (var item in items)
-    //         {
-    //             Console.WriteLine(item);
-    //         }
-    //     }
+        public static void Print<T>(this IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
+        }
 
-    //     public static void PrintSingle<T>(this T item) => Console.WriteLine(item);
-    //}
+        public static void PrintSingle<T>(this T item) => Console.WriteLine(item);
+        
     }
 }

@@ -1,71 +1,100 @@
 using System.Linq;
 using System;
+using System.Collections.Generic;
 namespace BDSA2021.Assignment03
 {
     public class Queries
     {
-        // public IReadOnlyCollection<Wizard> ByRowling<Wizard>(){
-        //     var wizards = Wizard.Wizards.Value.AsEnumerable;
-        //     return wizards.Where(w => w.Creator.Contains("Rowling")).Select(w => new {Name = w.Name});
-        // }
-
-
         /* Exercise 1 - Wizards invented by Rowling. Only return the names.
         
-        // Using LINQ
-        var ByRowling = from w in Wizard
-                        where w.Name.Contains("Rowling")
-                        select new { Name = w.Name };
+        Using LINQ*/
+        public static IEnumerable<string> byRowling()
+        {
+            var ByRowling = from w in Wizard.Wizards.Value
+                            where w.Creator.Contains("Rowling")
+                            select w.Name;
 
-        ByRowling.Print();
+            return ByRowling;
+        }
+        
 
         // Using Extentions
-        var ByRowlingSorted = Wizard.Where(w => w.Name.Contains("Rowling"))
-                                    .Select(w => new { Name = w.Name });
-        ByRowlingSorted.Print();
-        */
+        public static IEnumerable<string> byRowlingSorted()
+        {
+            var ByRowlingSorted = Wizard.Wizards.Value.Where(w => w.Creator.Contains("Rowling"))
+                                    .Select(w => w.Name);
+            return ByRowlingSorted;
+        }
+        
+        
 
         /* Exercise 2 - The year the first sith lord ( Darth something ) was introduced. 
         
-        // Using LINQ
-        var FirstDarth = (from w in Wizard
+        Using LINQ */
+        public static IEnumerable<int?> firstDarth()
+        {
+            var FirstDarth = (from w in Wizard.Wizards.Value
                         where w.Name.Contains("Darth")
-                        orderby c.Year
-                        select new { Name = w.Name, Year = w.Year }).Take(1);
-        FirstDarth.Print()
+                        orderby w.Year
+                        select w.Year).Take(1);
+            return FirstDarth;
+        }
+        
 
         // Using Extentions
-        var FirstDarthSorted = Wizard.Where(w => w.Name.Contains("Darth"))
-                                    .orderby(w => w.Year)
-                                    .Select(w => new { Name = w.Name, Year = w.Year })
-                                    .Take(1);
-        FirstDarthSorted.Print();
-        */
+        public static IEnumerable<int?> firstDarthSorted(){
+            var FirstDarthSorted = Wizard.Wizards.Value.Where(w => w.Name.Contains("Darth"))
+                                .OrderBy(w => w.Year)
+                                .Select(w => w.Year)
+                                .Take(1);
+            return FirstDarthSorted;
+        }
+        
+        
         
 
         /* Exercise 3 Unique list of wizards from the Harry Potter books - return name and year
         
-        // Using LINQ 
-        var HarryPotter = from w in Wizard
-                        where w.Medium.Contains("Harry Potter")
-                        select new { Name = w.Name, Year = w.Year } 
-        HarryPotter.Print();
+         Using LINQ */
+        public static IEnumerable<(string, int?)> HarryPotter()
+        {
+            var HarryPotter = from w in Wizard.Wizards.Value
+                    where w.Medium.Contains("Harry Potter")
+                    select ( w.Name, w.Year );
+            return HarryPotter;
+        }
+        
 
          // Using Extentions
-        var HarryPotterSorted = Wizard.Where(w => w.Medium.Contains("Harry Potter"))
-                                    .Select(w => new { Name = w.Name, Year = w.Year });
-        HarryPotterSorted.Print();
-        */
+        public static IEnumerable<(string, int?)> HarryPotterSorted(){
+            var HarryPotterSorted = Wizard.Wizards.Value.Where(w => w.Medium.Contains("Harry Potter"))
+                                .Select(w => (w.Name, w.Year));
+            return HarryPotterSorted;
+        }
+        
+        
 
         // Exercise 4 List of wizard names grouped by creator 
         // Print in reverse order: creator name and then wizard name.
 
-        // Using lINQ
-        var sortedWizards = from w in Wizard
-                            group w by w.Creator into h
-                            select new { Creator = h.Key, Wizard = w.name };
-        sortedWizards.Print();
+        //Using Linq
+        // public static IEnumerable<(string,string)> SortedWizards() 
+        // {
+        //     var sortedWizards = from w in Wizard.Wizards.Value
+        //                     group w by w.Creator into h
+        //                     select (w.Creator, h.Name);
+        //     return sortedWizards;
+        // }
+        
 
-        // Using Extension
+        // // // Using Extension
+        // public static IEnumerable<(string, string)> WizardsReverse()
+        // {
+        //     var wizards = Wizard.Wizards.Value
+        //                 .GroupBy(x => x.Creator)
+        //                 .Reverse()
+        //                 .Select(y => (y.Creator, y.Name));
+        //     return wizards;
+        // }
     }   
 }
