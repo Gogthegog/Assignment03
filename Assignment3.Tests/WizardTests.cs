@@ -40,6 +40,12 @@ namespace BDSA2021.Assignment03.Tests
             Assert.Contains(potters, p => p.Equals(("Dumbledore", 2001)) || p.Equals(("Harry Potter", 2001)));
         }
 
+        [Fact]
+        public void reverseWizards()
+        {
+            
+        }
+
         [Theory]
         [InlineData("Darth Vader", "Star Wars", 1977, "George Lucas")]
         [InlineData("Sauron", "The Fellowship of the Ring", 1954, "J.R.R. Tolkien")]

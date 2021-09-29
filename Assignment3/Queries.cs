@@ -75,26 +75,26 @@ namespace BDSA2021.Assignment03
         
 
         // Exercise 4 List of wizard names grouped by creator 
-        // Print in reverse order: creator name and then wizard name.
 
         //Using Linq
-        // public static IEnumerable<(string,string)> SortedWizards() 
-        // {
-        //     var sortedWizards = from w in Wizard.Wizards.Value
-        //                     group w by w.Creator into h
-        //                     select (w.Creator, h.Name);
-        //     return sortedWizards;
-        // }
+        public static IEnumerable<IGrouping<string,string>> SortedWizards() 
+        {
+            var sortedWizards = from w in Wizard.Wizards.Value
+                            orderby w.Creator descending, w.Name descending
+                            group w by w.Creator;
+
+            return sortedWizards;
+        }
         
 
-        // // // Using Extension
-        // public static IEnumerable<(string, string)> WizardsReverse()
-        // {
-        //     var wizards = Wizard.Wizards.Value
-        //                 .GroupBy(x => x.Creator)
-        //                 .Reverse()
-        //                 .Select(y => (y.Creator, y.Name));
-        //     return wizards;
-        // }
+        //Using Extension
+        public static IEnumerable<IGrouping<string,string>> WizardsReverse()
+        {
+            var wizards = Wizard.Wizards.Value
+                        .OrderByDescending(w => w.Creator)
+                        .ThenByDescending(w => w.Name)
+                        .GroupBy(w => (w.Creator), w => w.Name);
+            return wizards;
+        }
     }   
 }
