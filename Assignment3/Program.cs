@@ -1,4 +1,5 @@
 ﻿using System;
+using BDSA2021.Assignment03;
 
 namespace Assignment3
 {
@@ -6,7 +7,8 @@ namespace Assignment3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Queries.SortedWizards().Print();
+            Queries.WizardsReverse().Print();
         }
     }
 }

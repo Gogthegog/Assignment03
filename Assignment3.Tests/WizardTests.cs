@@ -43,6 +43,11 @@ namespace BDSA2021.Assignment03.Tests
         [Fact]
         public void reverseWizards()
         {
+            var wizards1 = Queries.SortedWizards();
+            var wizards2 = Queries.WizardsReverse();
+
+            Assert.Equal(wizards1.ToString(), wizards2.ToString());
+            //this test was successfully done by doing blackbox testing with custom extension method Print(), check 
             
         }
 

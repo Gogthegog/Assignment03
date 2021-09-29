@@ -71,29 +71,27 @@ namespace BDSA2021.Assignment03
                                 .Select(w => (w.Name, w.Year));
             return HarryPotterSorted;
         }
-        
-        
-
+    
         // Exercise 4 List of wizard names grouped by creator 
 
         //Using Linq
-        public static IEnumerable<IGrouping<string,string>> SortedWizards() 
+        public static IEnumerable<(string, string)> SortedWizards() 
         {
             var sortedWizards = from w in Wizard.Wizards.Value
                             orderby w.Creator descending, w.Name descending
-                            group w by w.Creator;
-
+                            select (w.Creator.ToString(), w.Name.ToString());
+                            
             return sortedWizards;
         }
         
 
         //Using Extension
-        public static IEnumerable<IGrouping<string,string>> WizardsReverse()
+        public static IEnumerable<(string,string)> WizardsReverse()
         {
             var wizards = Wizard.Wizards.Value
                         .OrderByDescending(w => w.Creator)
                         .ThenByDescending(w => w.Name)
-                        .GroupBy(w => (w.Creator), w => w.Name);
+                        .Select(w => (w.Creator, w.Name));
             return wizards;
         }
     }   
